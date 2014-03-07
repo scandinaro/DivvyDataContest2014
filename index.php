@@ -54,7 +54,7 @@ if ($gender != '' || $age != '' || $user_type != ''){
 
 //get popChart data
 //check DB cache for results
-$popResults = dbcache::query("SELECT a.start_station_id as station_id, a.start_station_name AS station_name, count(a.id) AS starts, b.ends, count(a.id) - b.ends AS diff
+$popResults = dbcache::query("SELECT a.start_station_id as station_id, a.start_station_name AS station_name, count(a.id) AS starts, b.ends, b.ends - count(a.id) AS diff
         FROM trips AS a
         LEFT JOIN
         (SELECT a.end_station_id, a.end_station_name, count(a.id) AS ends FROM trips AS a $filters GROUP BY a.end_station_id) AS b
@@ -88,6 +88,7 @@ if (count($popResults) >= 14){
 <head>
     <meta charset="utf-8">
     <title>Enjoy Chicago - See the city with Divvy</title>
+    <link href='http://fonts.googleapis.com/css?family=Arbutus+Slab|IM+Fell+Great+Primer|IM+Fell+Great+Primer+SC' rel='stylesheet' type='text/css'>
     <link href="css/main.css" rel="stylesheet" type="text/css"  />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
     <script src="js/Chart.min.js"></script>
@@ -190,8 +191,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <h2>Station Popularity</h2>
-        <h3># of rides that start at each station vs end at each station</h3>
+        <h2>Bike Accumulation by Station</h2>
+        <h3># of rides that end at each station - start at each station</h3>
         <canvas id="popCanvas" height="500px" width="900px"></canvas>
     </div>
 

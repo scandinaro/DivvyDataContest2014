@@ -3,26 +3,109 @@
     margin: 0 0;
 }
 
-h2 {
+body{
+    font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:#573a48;
+    font-size:14px;
+    background-image:url(../images/bg.jpg);
+    background-repeat:repeat;
+    position:relative;
+}
 
+h2 {
+    font-family: 'Arbutus Slab', 'Rockwell', 'Courier New', serif;
+    color:#ba533f;
+    font-size:40px;
+    margin:0 0 5px;
 }
 
 h3 {
-
+    font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:#573a48;
+    font-size:20px;
+    margin:5px 0 20px;
 }
 
 header {
     text-align: center;
+    height:100px;
+    width:100%;
+    box-shadow:0 4px 16px #b7a790;
+    background-color:#fff;
+    background-color:rgba(255,255,255,.8);
+    position:fixed;
+    top:0;
+    z-index:2;
 }
+.logo{
+    background-image:url(../images/logo.png);
+    background-repeat:no-repeat;
+    background-position:top left;
+    width:434px;
+    height:30px;
+    float:left;
+    margin:10px 0 0;
+    padding:60px 0 0;
+    text-align:right;
+    font-size:16px;
+    font-family: 'IM Fell Great Primer SC', "Palatino Linotype", "Book Antiqua", Palatino, serif;
 
+}
+.clear{
+    clear:both;
+}
+.wrapper{
+    width:1000px;
+    padding:0 50px;
+    margin:0 auto;
+}
 .graph-wrapper {
-
+    width: 900px;
+    margin: 40px auto 20px;
+    padding:50px;
+    background-color:#fff;
+    box-shadow:0 4px 16px #b7a790;
+    position:relative;
+}
+.top{
+    margin-top:120px;
+}
+.corner1{
+    background-image:url(../images/corner1.png);
+    position:absolute;
+    top:-7px;
+    left:-11px;
+    width:64px;
+    height:64px;
+}
+.corner2{
+    background-image:url(../images/corner2.png);
+    position:absolute;
+    top:-7px;
+    right:-11px;
+    width:64px;
+    height:64px;
+}
+.corner3{
+    background-image:url(../images/corner3.png);
+    position:absolute;
+    bottom:-15px;
+    left:-11px;
+    width:64px;
+    height:64px;
+}
+.corner4{
+    background-image:url(../images/corner4.png);
+    position:absolute;
+    bottom:-15px;
+    right:-11px;
+    width:64px;
+    height:64px;
 }
 
 #map-canvas {
     height: 500px;
-    width: 100%;
+    width: 900px;
     margin: 0px;
     padding: 0px
 }
-

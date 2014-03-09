@@ -97,21 +97,7 @@ if (count($popResults) >= 14){
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
-    <script type="text/javascript">
-		$(document).ready(function(){
-			//.parallax(xPosition, speedFactor, outerHeight) options:
-			//xPosition - Horizontal position of the element
-			//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
-			//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
-			$('#break_img1').parallax("50%", 0.3);
-			$('#break_img2').parallax("50%", 0.3);
-			$('#break_img3').parallax("50%", 0.3);
-			$('#break_img4').parallax("50%", 0.3);
-			$('#break_img5').parallax("50%", 0.3);
-		
-		})
-	</script>
-    
+    <script type="text/javascript" src="js/main.js"></script>
     <script src="js/Chart.min.js"></script>
 <script>
 // heat map shit

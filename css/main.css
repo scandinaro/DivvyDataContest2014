@@ -103,9 +103,10 @@ header {
     height:64px;
 }
 
-#map-canvas {
+#heat-map-canvas,
+#routing-map-canvas {
     height: 500px;
     width: 900px;
-    margin: 0px;
-    padding: 0px
+    margin: 0;
+    padding: 0;
 }

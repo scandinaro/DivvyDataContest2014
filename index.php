@@ -11,45 +11,49 @@ $user_type = isset($_POST['user_type']) ? $_POST['user_type'] : '';
 $filters = '';
 //setup where statement
 if ($gender != '' || $age != '' || $user_type != ''){
-    $filters = 'WHERE ';
-    if ($gender != ''){
+    $filters = array();
+    if (!empty($gender)){
         if ($gender == 'm'){
-            $filters .= "a.gender='Male' AND ";
+            $filters[] = "a.gender='Male'";
         }
         elseif ($gender == 'f'){
-            $filters .= "a.gender='Female' AND ";
+            $filters[] = "a.gender='Female'";
         }
     }
-    if ($age != ''){
+    if (!empty($age)){
         if ($age == 18){
-            $filters .= "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 18 YEAR)) AND ";
+            $filters[] = "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 18 YEAR))";
         }
         elseif ($age == 19){
-            $filters .= "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 19 YEAR)) AND a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 21 YEAR)) AND ";
+            $filters[] = "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 19 YEAR))";
+            $filters[] = "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 21 YEAR))";
         }
         elseif ($age == 22){
-            $filters .= "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 22 YEAR)) AND a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 30 YEAR)) AND ";
+            $filters[] = "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 22 YEAR))";
+            $filters[] = "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 30 YEAR))";
         }
         elseif ($age == 31){
-            $filters .= "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 31 YEAR)) AND a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 40 YEAR)) AND ";
+            $filters[] = "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 31 YEAR))";
+            $filters[] = "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 40 YEAR))";
         }
         elseif ($age == 41){
-            $filters .= "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 41 YEAR)) AND a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 50 YEAR)) AND ";
+            $filters[] = "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 41 YEAR))";
+            $filters[] = "a.birth_year>=YEAR(DATE_SUB(NOW(),INTERVAL 50 YEAR))";
         }
         elseif ($age == 51){
-            $filters .= "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 51 YEAR)) AND ";
+            $filters[] = "a.birth_year<=YEAR(DATE_SUB(NOW(),INTERVAL 51 YEAR))";
         }
     }
-    if ($user_type != ''){
+    if (!empty($user_type)){
         if ($user_type == 'customer'){
-            $filters .= "a.user_type='Customer' AND ";
+            $filters[] = "a.user_type='Customer'";
         }
         elseif ($user_type == 'subscriber'){
-            $filters .= "a.user_type='Subscriber' AND ";
+            $filters[] = "a.user_type='Subscriber'";
         }
     }
 
-    $filters = substr($filters, 0, strlen($filters)-5);
+    $filters = "WHERE ".implode(" AND ", $filters);
 }
 
 //get popChart data
@@ -89,56 +93,35 @@ if (count($popResults) >= 14){
     <meta charset="utf-8">
     <title>Enjoy Chicago - See the city with Divvy</title>
     <link href='http://fonts.googleapis.com/css?family=Arbutus+Slab|IM+Fell+Great+Primer|IM+Fell+Great+Primer+SC' rel='stylesheet' type='text/css'>
-    <link href="css/main.css" rel="stylesheet" type="text/css"  />
+    <link href="css/main.css" rel="stylesheet" type="text/css" />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/Chart.min.js"></script>
 <script>
 // heat map shit
-var map, pointarray, heatmap;
-
-var mapData = [
-    <?php
-        $results = dbcache::query("SELECT b.id, b.name, b.latitude, b.longitude, ceil(count(a.id)/500) as num_trips
-            FROM trips AS a
-            LEFT JOIN stations AS b
-            ON a.start_station_id = b.id
-            $filters
-            GROUP BY b.id");
-        $mapData = '';
-        foreach ($results as $row) {
-            $num_trips = $row['num_trips'];
-            for ($i=0; $i<$num_trips; $i++){
-                $mapData .= "new google.maps.LatLng(" . $row['latitude'] . ", " . $row['longitude'] . "),";
-            }
+var mapData = [<?php
+    $results = dbcache::query("SELECT b.id, b.name, b.latitude, b.longitude, ceil(count(a.id)/500) as num_trips
+        FROM trips AS a
+        LEFT JOIN stations AS b
+        ON a.start_station_id = b.id
+        $filters
+        GROUP BY b.id");
+    $mapData = '';
+    foreach ($results as $row) {
+        $num_trips = $row['num_trips'];
+        for ($i=0; $i<$num_trips; $i++){
+            $mapData .= "new google.maps.LatLng(" . $row['latitude'] . ", " . $row['longitude'] . "),";
         }
-        //trim last coma
-        $mapData = substr($mapData,0, strlen($mapData)-1);
-        echo $mapData;
-    ?>
-];
-
-function initialize() {
-    var mapOptions = {
-        zoom: 11,
-        center: new google.maps.LatLng(41.889710, -87.629788),
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-    };
-
-    map = new google.maps.Map(document.getElementById('map-canvas'),
-        mapOptions);
-
-    var pointArray = new google.maps.MVCArray(mapData);
-
-    heatmap = new google.maps.visualization.HeatmapLayer({
-        data: pointArray
-    });
-
-    heatmap.setMap(map);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
+    }
+    //trim last coma
+    $mapData = substr($mapData,0, strlen($mapData)-1);
+    echo $mapData;
+?>];
+// END - heat map shit
 
 </script>
+<script type="text/javascript" src="js/google.api.heatmap.js"></script>
+<script type="text/javascript" src="js/google.api.routing.js"></script>
 </head>
 
 <body>
@@ -183,7 +166,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <div class="corner4"></div>
         <h2>Choropleth map</h2>
         <h3>The proper name for the so-called "heat-map"</h3>
-        <div id="map-canvas"></div>
+        <div id="heat-map-canvas"></div>
     </div>
 
     <div class="graph-wrapper">
@@ -196,19 +179,33 @@ google.maps.event.addDomListener(window, 'load', initialize);
         <canvas id="popCanvas" height="500px" width="900px"></canvas>
     </div>
 
+    <div class="graph-wrapper">
+        <div class="corner1"></div>
+        <div class="corner2"></div>
+        <div class="corner3"></div>
+        <div class="corner4"></div>
+        <h2>Estimated Bike Routing</h2>
+        <h3>Just an estimated potential route Divvy bikes may have taken.</h3>
+        <div id="routing-map-canvas"></div>
+        <div>
+            <label>Select a start date to view a potential route: <input type="date" name="bike-day-start" id="bike-day-start" /></label><br/>
+            <label>Select a end date to view a potential route: <input type="date" name="bike-day-end" id="bike-day-end" /></label><br/>
+            <label>What Divvy would you like to follow: <input type="number" name="bike-id" id="bike-id" placeholder="1-3003" /><br/>
+            <em>Note: not all numbers are valid.</em></label><br/>
+            <button type="button" id="submit-route">Submit</button>
+        </div>
+    </div>
+
     <script>
         // Station Popularity
         var barChartData = {
             labels : [<?=$popLabels?>],
-            datasets : [
-                {
-                    fillColor : "rgba(151,187,205,0.5)",
-                    strokeColor : "rgba(151,187,205,1)",
-                    data : [<?=$popNums?>]
-                }
-            ]
-
-        }
+            datasets : [{
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                data : [<?=$popNums?>]
+            }]
+        };
 
         var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData, {animation : false});
     </script>

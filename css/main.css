@@ -110,3 +110,42 @@ header {
     margin: 0;
     padding: 0;
 }
+.break_img{
+	background-position:50% 0;
+	background-repeat:no-repeat;
+	background-attachment:fixed;
+	background-size:100%;
+	color: white;
+	height: 500px;
+	margin: 40px auto 20px;
+	padding: 0;
+	width:100%;
+	min-width:1200px;
+	box-shadow:inset 0 0 20px #573a48;
+	position:relative;
+}
+#break_img1{
+	background-image:url(../images/break_img1.jpg);
+}
+#break_img2{
+	background-image:url(../images/break_img2b.jpg);
+}
+#break_img3{
+	background-image:url(../images/break_img3b.jpg);
+}
+#break_img4{
+	background-image:url(../images/break_img4b.jpg);
+}
+#break_img5{
+	background-image:url(../images/break_img5.jpg);
+}
+.break_img p{
+	position:absolute;
+	top:250px;
+	font-size:32px;
+    font-family: 'IM Fell Great Primer SC', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color:#fff;
+	text-align:center;
+	width:100%;
+	text-shadow:0 0 5px #573a48, 0 0 10px #573a48 ;
+}

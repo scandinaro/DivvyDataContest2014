@@ -96,6 +96,22 @@ if (count($popResults) >= 14){
     <link href="css/main.css" rel="stylesheet" type="text/css" />
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=visualization"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.parallax-1.1.3.js"></script>
+    <script type="text/javascript">
+		$(document).ready(function(){
+			//.parallax(xPosition, speedFactor, outerHeight) options:
+			//xPosition - Horizontal position of the element
+			//inertia - speed to move relative to vertical scroll. Example: 0.1 is one tenth the speed of scrolling, 2 is twice the speed of scrolling
+			//outerHeight (true/false) - Whether or not jQuery should use it's outerHeight option to determine when a section is in the viewport
+			$('#break_img1').parallax("50%", 0.3);
+			$('#break_img2').parallax("50%", 0.3);
+			$('#break_img3').parallax("50%", 0.3);
+			$('#break_img4').parallax("50%", 0.3);
+			$('#break_img5').parallax("50%", 0.3);
+		
+		})
+	</script>
+    
     <script src="js/Chart.min.js"></script>
 <script>
 // heat map shit
@@ -158,8 +174,19 @@ var mapData = [<?php
         </div>
         <div class="clear"></div>
     </header>
-
-    <div class="graph-wrapper top">
+	<div class="graph-wrapper top">
+        <div class="corner1"></div>
+        <div class="corner2"></div>
+        <div class="corner3"></div>
+        <div class="corner4"></div>
+        <h2>Intro</h2>
+        <h3>placeholder...</h3>
+        
+    </div>
+    <div id="break_img1" class="break_img">
+    	<p>the City Beautiful</p>
+    </div>
+    <div class="graph-wrapper">
         <div class="corner1"></div>
         <div class="corner2"></div>
         <div class="corner3"></div>
@@ -168,7 +195,9 @@ var mapData = [<?php
         <h3>The proper name for the so-called "heat-map"</h3>
         <div id="heat-map-canvas"></div>
     </div>
-
+	<div id="break_img2" class="break_img">
+    	<p>the City in a Garden</p>
+    </div>
     <div class="graph-wrapper">
         <div class="corner1"></div>
         <div class="corner2"></div>
@@ -178,7 +207,9 @@ var mapData = [<?php
         <h3># of rides that end at each station - start at each station</h3>
         <canvas id="popCanvas" height="500px" width="900px"></canvas>
     </div>
-
+	<div id="break_img3" class="break_img">
+    	<p>the Jewel of the Midwest</p>
+    </div>
     <div class="graph-wrapper">
         <div class="corner1"></div>
         <div class="corner2"></div>
@@ -195,7 +226,21 @@ var mapData = [<?php
             <button type="button" id="submit-route">Submit</button>
         </div>
     </div>
-
+	<div id="break_img4" class="break_img">
+    	<p>the Paris on the Prairie</p>
+    </div>
+    <div class="graph-wrapper">
+        <div class="corner1"></div>
+        <div class="corner2"></div>
+        <div class="corner3"></div>
+        <div class="corner4"></div>
+        <h2>Another?</h2>
+        <h3>placeholder...</h3>
+        
+    </div>
+    <div id="break_img5" class="break_img">
+    	<p>a Marvel of Engineering</p>
+    </div>
     <script>
         // Station Popularity
         var barChartData = {

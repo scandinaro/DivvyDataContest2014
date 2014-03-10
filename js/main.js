@@ -12,6 +12,7 @@ $( document ).ready(function() {
             $("#user_type").attr("disabled", false);
         }
         else {
+            $("#user_type").val('');
             $("#user_type").attr("disabled", true);
         }
     });
@@ -23,7 +24,20 @@ $( document ).ready(function() {
             $("#user_type").attr("disabled", false);
         }
         else {
+            $("#user_type").val('');
             $("#user_type").attr("disabled", true);
+        }
+    });
+
+    $("#user_type").change(function() {
+        var user_type = $("#user_type").val();
+        if (user_type == "customer") {
+            $("#age").attr("disabled", true);
+            $("#gender").attr("disabled", true);
+        }
+        else {
+            $("#age").attr("disabled", false);
+            $("#gender").attr("disabled", false);
         }
     });
 });

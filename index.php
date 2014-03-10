@@ -1,14 +1,13 @@
 <?php
 require_once 'includes/dbcache.php';
 
-//TODO handle locking user filter to only subscribers once age or gender are selected
-
 //get filters
 $gender = isset($_POST['gender']) ? $_POST['gender'] : '';
 $age = isset($_POST['age']) ? $_POST['age'] : '';
 $user_type = isset($_POST['user_type']) ? $_POST['user_type'] : '';
 
 $filters = '';
+$filtersNoWhere = '';
 //setup where statement
 if ($gender != '' || $age != '' || $user_type != ''){
     $filters = array();
@@ -54,10 +53,10 @@ if ($gender != '' || $age != '' || $user_type != ''){
     }
 
     $filters = "WHERE ".implode(" AND ", $filters);
+    $filtersNoWhere = str_replace("WHERE", "AND", $filters);
 }
 
 //get popChart data
-//check DB cache for results
 $popResults = dbcache::query("SELECT a.start_station_id as station_id, a.start_station_name AS station_name, count(a.id) AS starts, b.ends, b.ends - count(a.id) AS diff
         FROM trips AS a
         LEFT JOIN
@@ -85,6 +84,17 @@ if (count($popResults) >= 14){
     $popLabels = substr($popLabels, 0, strlen($popLabels)-1);
     $popNums = substr($popNums, 0, strlen($popNums)-1);
 }
+
+//get overage data
+$over = dbcache::query("SELECT count(a.id) AS over
+    FROM trips AS a
+    WHERE a.trip_duration/60>30 $filtersNoWhere");
+$over = $over[0]['over'];
+
+$under = dbcache::query("SELECT count(a.id) AS under
+    FROM trips AS a
+    WHERE a.trip_duration/60<30 $filtersNoWhere");
+$under = $under[0]['under'];
 
 ?>
 <!DOCTYPE html>
@@ -220,9 +230,13 @@ var mapData = [<?php
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <h2>Another?</h2>
-        <h3>placeholder...</h3>
-        
+        <h2>The Over/Under</h2>
+        <h3>Comparison of rides under and over the 30 minute cutoff where the overage fee begins.</h3>
+        <canvas id="overageCanvas" height="500px" width="900px"></canvas>
+        <div class="legend">
+            <div id="overLegend">Over 30 minutes</div>
+            <div id="underLegend">Under 30 minutes</div>
+        </div>
     </div>
     <div id="break_img5" class="break_img">
     	<p>a Marvel of Engineering</p>
@@ -238,7 +252,21 @@ var mapData = [<?php
             }]
         };
 
-        var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData, {animation : false});
+        var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData);
+
+        //overage chart
+        var pieData = [
+            {
+                value: <?=$under?>,
+                color: "#E9B055"
+            },
+            {
+                value : <?=$over?>,
+                color : "#61A19F"
+            }
+        ];
+
+        var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);
     </script>
 </body>
 </html>

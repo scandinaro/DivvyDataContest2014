@@ -149,3 +149,20 @@ header {
 	width:100%;
 	text-shadow:0 0 5px #573a48, 0 0 10px #573a48 ;
 }
+
+.legend {
+}
+
+#underLegend {
+    background-color: #E9B055;
+    float: left;
+    color: #fff;
+    padding: 5px;
+}
+
+#overLegend {
+    background-color: #61A19F;
+    float: right;
+    color: #fff;
+    padding: 5px;
+}

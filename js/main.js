@@ -92,7 +92,7 @@ function loadCharts(gender, age, user_type){
         var pieData1 = [
             {
                 value: parseInt(data.male),
-                color: "#E9B055"
+                color: "#a0c7c5"
             },
             {
                 value : parseInt(data.female),
@@ -155,11 +155,11 @@ function loadCharts(gender, age, user_type){
         var pieData = [
             {
                 value: parseInt(data.under),
-                color: "#E9B055"
+                color: "#E16652"
             },
             {
                 value : parseInt(data.over),
-                color : "#61A19F"
+                color : "#BA533f"
             }
         ];
         var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);

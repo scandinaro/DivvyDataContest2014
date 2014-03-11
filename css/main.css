@@ -251,37 +251,49 @@ select:disabled{
     margin: 0px auto;
 }
 
-#maleLegend, #customerLegend {
+#maleLegend{
+    background-color: #a0c7c5;
+    float: left;
+    color: #fff;
+    padding: 5px;
+}
+#customerLegend {
     background-color: #E9B055;
     float: left;
     color: #fff;
     padding: 5px;
 }
 
-#femaleLegend, #subscriberLegend {
+#femaleLegend{
     background-color: #61A19F;
+    float: right;
+    color: #fff;
+    padding: 5px;
+}
+#subscriberLegend {
+    background-color: #D4791C;
     float: right;
     color: #fff;
     padding: 5px;
 }
 
 #underLegend {
-    background-color: #E9B055;
+    background-color: #E16652;
     float: left;
     color: #fff;
     padding: 5px;
 }
 #underPercent{
-    background-color: #E9B055;
+    background-color: #E16652;
 }
 #overLegend {
-    background-color: #61A19F;
+    background-color: #BA533f;
     float: right;
     color: #fff;
     padding: 5px;
 }
 #overPercent{
-    background-color: #61A19F;
+    background-color: #BA533f;
 }
 .percent-indicator{
     font-family: sans-serif;
@@ -300,26 +312,24 @@ select:disabled{
     margin: -10px 10px 20px 0;
     float: right;
 }
-#malePercent{
+#customerPercent{
     line-height: 40px;
     width: 40px;
     height: 40px;
     background-color: #E9B055;
 }
-#femalePercent{
-    line-height: 40px;
-    width: 40px;
-    height: 40px;
-    background-color: #61A19F;
-}
-#customerPercent,
 #malePercent{
     line-height: 40px;
     width: 40px;
     height: 40px;
     background-color: #a0c7c5;
 }
-#subscriberPercent,
+#subscriberPercent{
+    line-height: 40px;
+    width: 40px;
+    height: 40px;
+    background-color: #D4791C;
+}
 #femalePercent{
     line-height: 40px;
     width: 40px;

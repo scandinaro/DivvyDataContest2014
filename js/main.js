@@ -59,7 +59,7 @@ function loadIntroData(){
         var pieData1 = [
             {
                 value: parseInt(data.male),
-                color: "#E9B055"
+                color: "#a0c7c5"
             },
             {
                 value : parseInt(data.female),
@@ -76,7 +76,7 @@ function loadIntroData(){
             },
             {
                 value : parseInt(data.subscriber),
-                color : "#61A19F"
+                color : "#D4791C"
             }
         ];
         var user_typeChart = new Chart(document.getElementById("user_typeCanvas").getContext("2d")).Pie(pieData2);

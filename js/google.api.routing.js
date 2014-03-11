@@ -1,10 +1,11 @@
 var directionsDisplay, map;
 var directionsService = new google.maps.DirectionsService();
-var bikeOrigin, bikeDestination, bikeWaypoints=[], routeData;
+var bikeOrigin, bikeDestination, bikeWaypoints, routeData;
 var waypointLimit = 7;
 
 
 function initializeRouting() {
+    bikeWaypoints = [];
     var originData = JSON.parse(routeData.bikeOrigin);
     var destinationData = JSON.parse(routeData.bikeDestination);
     var waypointData = JSON.parse(routeData.bikeWaypoints);

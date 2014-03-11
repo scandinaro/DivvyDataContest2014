@@ -21,14 +21,14 @@
             <form action="index.html" method="post" id="filter_data" >
 
                 <select id="gender" name="gender">
-                    <option value="">all genders</option>
-                    <option value="m">male</option>
-                    <option value="f">female</option>
+                    <option value="">All Genders</option>
+                    <option value="m">Male</option>
+                    <option value="f">Female</option>
                 </select>
 
                 <select id="age" name="age">
-                    <option value="">all ages</option>
-                    <option value="18">18 and under</option>
+                    <option value="">All Ages</option>
+                    <option value="18">18 and Under</option>
                     <option value="19">19-21</option>
                     <option value="22">22-30</option>
                     <option value="31">31-40</option>
@@ -37,9 +37,9 @@
                 </select>
 
                 <select id="user_type" name="user_type">
-                    <option value="">all users</option>
-                    <option value="customer">customer</option>
-                    <option value="subscriber">subscriber</option>
+                    <option value="">All Users</option>
+                    <option value="customer">One-time Users</option>
+                    <option value="subscriber">Members</option>
                 </select>
 
                 <input type="submit" value="filter" />
@@ -53,10 +53,14 @@
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <h2>Intro</h2>
-        <h3>placeholder... This box should give 3 general charts side by side - maybe men vs women (which can filter by age), the ages broken out (which can filter by sex), and customer vs subscriber. We should also explain how to use the filter, and say that it works for each chart.</h3>
+        <h2>Welcome, traveler!</h2>
+        <p>On this trip, you'll explore Chicago, the City in a Garden. Although the L has been called a marvel of engineering, bicycles allow an intimate view of the city. In the past few years, Chicago has implemented more bicycle lanes, some of which are protected, just in time for your visit. Splendid! This report will outline information from the bicycle sharing program, Divvy.</p>
+
+<p>Before you get started, please notice a set of filters above. These will guide you through most of the information listed below. Simply select the variables you'd like to view, and click the filter button. Now you're ready to get rolling!</p>
+
+<p>For your enjoyment, three charts have been included in this first section. These charts contrast each of our base filter options.</p>
         <div class="left">
-            <h4>Gender *filter agnostic</h4>
+            <h4>Gender of Riders</h4>
             <canvas id="genderCanvas" height="400px" width="400px"></canvas>
             <br />
             <div id="maleLegend">Male</div>
@@ -65,11 +69,11 @@
             <div id="femalePercent" class="percent-indicator right-percent"></div>
         </div>
         <div class="right">
-            <h4 >User Type *filter agnostic</h4>
+            <h4 >User Types</h4>
             <canvas id="user_typeCanvas" height="400px" width="400px"></canvas>
             <br />
-            <div id="customerLegend">Customer</div>
-            <div id="subscriberLegend">Subscriber</div>
+            <div id="customerLegend">One-time Users</div>
+            <div id="subscriberLegend">Members</div>
             <div id="customerPercent" class="percent-indicator left-percent"></div>
             <div id="subscriberPercent" class="percent-indicator right-percent"></div>
         </div>
@@ -83,8 +87,8 @@
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <h2>Heat Map of Divvy Activity</h2>
-        <h3>Listed is a map of the stations</h3>
+        <h2>Where is all of Activity?</h2>
+        <p>Now that you've got your training-wheels off, you'd like to find the hot spots for a night on the town with Divvy. You're in luck! This map was made especially for you; it shows all of the locations where trips started in a sort of heat map, if you will. </p>
         <div id="heat-map-canvas"></div>
     </div>
 	<div id="break_img2" class="break_img">
@@ -95,8 +99,9 @@
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <h2>Bike Accumulation by Station</h2>
-        <h3># of rides that end at each station - start at each station</h3>
+        <h2>Where do these Cyclists Go?</h2>
+        <p>Now you're confident in where you can start, but naturally the question arises, "Where to?" We've charted the top 7 destinations to end a ride. The stations with a positive number show how many bicycles accumulate there, contrasted by the stations where bicycles seem to dissipate from, which is to say that these are great stations to start a trip, but the trend is not to return to them.
+</p>
         <canvas id="popCanvas" height="500px" width="900px"></canvas>
     </div>
 	<div id="break_img3" class="break_img">
@@ -108,12 +113,12 @@
         <div class="corner3"></div>
         <div class="corner4"></div>
         <h2>A Day in the Life of a Divvy Bike</h2>
-        <h3>Map the route of a particular Divvy Bike.</h3>
+        <p>But how to get there, you ask?  Chicago is a big city, and there are all of these different streets…don't fret, friend. This map will follow the route of a particular Divvy bicycle. Use it to view the journey that other bicycles travel on a given day. We're still pulling for you.</p>
         <div id="routing-map-canvas"></div>
         <div>
             <label>Select a date to view a potential route: <input type="date" name="bike-day" id="bike-day" /></label><br/>
-            <label>What Divvy would you like to follow: <input type="number" name="bike-id" id="bike-id" placeholder="1-3003" /><br/>
-            <em>Note: not all numbers are valid.</em></label><br/>
+            <label>Which Divvy would you like to follow: <input type="number" name="bike-id" id="bike-id" placeholder="1-3003" /><br/>
+            <em>Please note: not every bicycle was lovingly ridden on a given day. If you choose one of these combinations, please try another</em></label><br/>
             <button type="button" id="submit-route">Submit</button>
         </div>
     </div>
@@ -126,7 +131,7 @@
         <div class="corner3"></div>
         <div class="corner4"></div>
         <h2>The Over/Under</h2>
-        <h3>Comparison of rides under and over the 30 minute cutoff where the overage fee begins.</h3>
+        <p>The ride with Divvy is limited to a half an hour time limit. The chart below outlines how many rides were over this allotted time, resulting in a fee, in comparison to how many were under. Be sure to periodically assess how much time you have left, and don't dilly-dally too long!</p>
         <canvas id="overageCanvas" height="500px" width="900px"></canvas>
         <div class="legend">
             <div id="overLegend">Over 30 minutes</div>
@@ -136,7 +141,15 @@
         </div>
     </div>
     <div id="break_img5" class="break_img">
-    	<p>a Marvel of Engineering</p>
+    	<p>the City that Works</p>
+    </div>
+    <div class="graph-wrapper">
+        <div class="corner1"></div>
+        <div class="corner2"></div>
+        <div class="corner3"></div>
+        <div class="corner4"></div>
+        <h2>Your Preparation is Complete</h2>
+        <p>Now that you've studied the record and know what to expect, you're ready to see the spectacular sites that the city offers! Your trip awaits you!</p>
     </div>
 </body>
 </html>

@@ -105,7 +105,7 @@ function loadCharts(gender, age, user_type){
 
     // bike accumulation
     var pop_labels, pop_nums = '';
-    $.get("includes/generate_bike_acum_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+    $.get("includes/generate_bike_acum_data.php", function(data) {
         data = $.parseJSON(data);
         var acumLabels = [];
         var acumNums = [];

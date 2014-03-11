@@ -48,22 +48,18 @@ function calcRoute() {
     });
 }
 
-function getRouteData (strict){
-    var startDate = $('#bike-day-start').val();
-    var endDate = $('#bike-day-end').val();
-    var bikeId = $('#bike-id').val();
-
+function getRouteData (){
     $.ajax({
         type: 'POST',
         url: 'includes/generate_route_data.php?x='+nocache(),
         cache: false,
         data: {
-            start_date : startDate,
-            end_date: endDate,
-            bike_id: bikeId,
-            strict: strict
+            bike_date : $('#bike-day').val(),
+            bike_id: $('#bike-id').val()
         },
-        beforeSend:function(){},
+        beforeSend:function(){
+            routeData=undefined;
+        },
         success:function(data){
             // successful request
             if(data == ''){
@@ -88,16 +84,14 @@ function isRouteDataAvailable(){
     } else {
         console.log('route data set');
         if(!routeData.error){
-            $('#bike-day-start').val(routeData.startDate);
-            $('#bike-day-end').val(routeData.endDate);
+            $('#bike-day').val(routeData.bikeDate);
             $('#bike-id').val(routeData.bikeId);
             initializeRouting();
         } else {
-            $('#bike-day-start').val(routeData.startDate).css({backgroundColor: '#E67777'});
-            $('#bike-day-end').val(routeData.endDate).css({backgroundColor: '#E67777'});
+            $('#bike-day').val(routeData.bikeDate).css({backgroundColor: '#E67777'});
             $('#bike-id').val(routeData.bikeId).css({backgroundColor: '#E67777'});
             $('#routing-map-canvas')
-                .html("<h1 style='padding-top: 100px;color: #ba533f;'>OOPs!</h1><br/><h4>It seems that we don't have any data available for the specified parameters.</h4>")
+                .html("<h1 style='padding-top: 150px;color: #ba533f;'>OOPs!</h1><br/><h4>It seems that we don't have any data available for Bike:"+routeData.bikeId+" on: "+routeData.bikeDate+".</h4>")
                 .css({textAlign: 'center'});
             console.error('error: Data could not be obtained');
         }
@@ -133,7 +127,7 @@ Math.degrees = function(radians) {
 };
 
 $(document).ready(function(){
-    $('#submit-route').click(function(){getRouteData(1)});
+    $('#submit-route').click(getRouteData);
 });
 
 function nocache(){
@@ -146,4 +140,4 @@ function nocache(){
     return text;
 }
 
-google.maps.event.addDomListener(window, 'load', function(){getRouteData(0)});
+google.maps.event.addDomListener(window, 'load', getRouteData);

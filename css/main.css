@@ -28,14 +28,46 @@ h3 {
 
 header {
     text-align: center;
-    height:100px;
+    height:119px;
     width:100%;
-    box-shadow:0 4px 16px #b7a790;
-    background-color:#fff;
-    background-color:rgba(255,255,255,.8);
+	background-image:url(../images/header_bg.png);
+	background-repeat:repeat-x;
     position:fixed;
     top:0;
     z-index:2;
+}
+header form{
+	padding:50px 0 0;
+	float:right;
+}
+input[type=submit]{
+	font-family: 'IM Fell Great Primer SC', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:#fff;
+    font-size:18px;
+	background-color:#e16652;
+	border:0;
+	border-bottom:solid 2px #ba533f;
+	border-radius:3px;
+	padding:5px 15px;
+	margin:0 0 0 5px;
+	-webkit-font-smoothing: antialiased;
+}
+input[type=submit]:hover{
+	background-color:#ba533f;
+	cursor:pointer;
+	border-bottom:solid 2px #9a431f;
+}
+select{
+	background-color:#f3e4bc;
+	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    color:#573a48;
+	font-size:14px;
+	padding:5px 15px;
+	height:20px;
+	border:0;
+	border-radius:0;
+	margin:0 5px;
+	cursor:pointer;
 }
 .logo{
     background-image:url(../images/logo.png);

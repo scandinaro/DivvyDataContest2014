@@ -46,11 +46,13 @@ $( document ).ready(function() {
         }
     });
 
+    loadIntroData();
     loadCharts('','','');
 
 });
 
-function loadCharts(gender, age, user_type){
+
+function loadIntroData(){
     //intro data
     $.get("includes/generate_intro_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
@@ -79,8 +81,10 @@ function loadCharts(gender, age, user_type){
         ];
         var user_typeChart = new Chart(document.getElementById("user_typeCanvas").getContext("2d")).Pie(pieData2);
     });
+}
 
 
+function loadCharts(gender, age, user_type){
     //heat map
     mapData = [];
     $.get("includes/generate_heatmap_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {

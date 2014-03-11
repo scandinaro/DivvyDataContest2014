@@ -213,17 +213,15 @@ var mapData = [<?php
         <div class="corner2"></div>
         <div class="corner3"></div>
         <div class="corner4"></div>
-        <!--<h2>Estimated Bike Routing</h2>
-        <h3>Just an estimated potential route Divvy bikes may have taken.</h3>-->
         <h2>A Day in the Life of a Divvy Bike</h2>
         <h3>Map the route of a particular Divvy Bike.</h3>
         <div id="routing-map-canvas"></div>
         <div>
-            <label>Select a start date to view a potential route: <input type="date" name="bike-day-start" id="bike-day-start" /></label><br/>
-            <label>Select a end date to view a potential route: <input type="date" name="bike-day-end" id="bike-day-end" /></label><br/>
+            <label>Select a date to view a potential route: <input type="date" name="bike-day" id="bike-day" /></label><br/>
             <label>What Divvy would you like to follow: <input type="number" name="bike-id" id="bike-id" placeholder="1-3003" /><br/>
             <em>Note: not all numbers are valid.</em></label><br/>
             <button type="button" id="submit-route">Submit</button>
+            <button type="button" id="submit-route">Randomize</button>
         </div>
     </div>
 	<div id="break_img4" class="break_img">

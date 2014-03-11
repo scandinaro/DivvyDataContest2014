@@ -11,7 +11,7 @@ function initializeRouting() {
     bikeOrigin = new google.maps.LatLng(originData[0], originData[1]);
     bikeDestination = new google.maps.LatLng(destinationData[0], destinationData[1]);
     $(waypointData).each(function(idx, val){
-        if(idx%(parseInt(waypointData.length/waypointLimit)) == 0 || waypointData.length < waypointLimit){
+        if(idx%(Math.ceil(waypointData.length/waypointLimit)) == 0 || waypointData.length < waypointLimit){
             // Because Google maps seems to only allow 7 waypoints per request, so we're going to have to space these out. Also, things will be a lot less cluttered.
             bikeWaypoints.push({
                 location: new google.maps.LatLng(val[0], val[1]),
@@ -33,7 +33,6 @@ function initializeRouting() {
 }
 
 function calcRoute() {
-    console.log("Calculating route");
     var request = {
         origin: bikeOrigin,
         destination: bikeDestination,
@@ -63,8 +62,7 @@ function getRouteData (){
         success:function(data){
             // successful request
             if(data == ''){
-                // TODO - panic
-                console.error('Time to panic!!! This should not happen');
+                // 'Time to panic!!! This should not happen'
             } else if(parseInt(data) == 0) {
                 routeData = '';
             } else {
@@ -77,23 +75,20 @@ function getRouteData (){
 }
 
 function isRouteDataAvailable(){
-    console.log('checking if data is available');
     if(typeof routeData == 'undefined'){
-        console.log('waiting...');
         setTimeout(isRouteDataAvailable, 3000);
     } else {
-        console.log('route data set');
         if(!routeData.error){
             $('#bike-day').val(routeData.bikeDate);
             $('#bike-id').val(routeData.bikeId);
             initializeRouting();
         } else {
+            //Data could not be obtained
             $('#bike-day').val(routeData.bikeDate).css({backgroundColor: '#E67777'});
             $('#bike-id').val(routeData.bikeId).css({backgroundColor: '#E67777'});
             $('#routing-map-canvas')
                 .html("<h1 style='padding-top: 150px;color: #ba533f;'>OOPs!</h1><br/><h4>It seems that we don't have any data available for Bike:"+routeData.bikeId+" on: "+routeData.bikeDate+".</h4>")
                 .css({textAlign: 'center'});
-            console.error('error: Data could not be obtained');
         }
     }
 }

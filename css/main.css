@@ -89,8 +89,11 @@ input[type=submit]:hover, button:hover{
 label input{
 	width:200px;
 }
+label input[type=number]{
+	width:50px;
+}
 label{
-	margin:15px 0;
+	line-height:50px;
 }
 select {
 	-webkit-appearance:none;

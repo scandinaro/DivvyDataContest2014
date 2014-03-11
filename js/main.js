@@ -94,17 +94,22 @@ function loadCharts(gender, age, user_type){
     var over = 0, under = 0;
     $.get("includes/generate_overunder_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
+        var underVal = parseInt(data.under);
+        var overVal = parseInt(data.over);
+        var total = overVal+underVal;
         var pieData = [
             {
-                value: parseInt(data.under),
+                value: underVal,
                 color: "#E9B055"
             },
             {
-                value : parseInt(data.over),
+                value : overVal,
                 color : "#61A19F"
             }
         ];
         var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);
+        $('#underPercent').html( Math.round((underVal/total)*100)+'%' );
+        $('#overPercent').html( Math.round((overVal/total)*100)+'%' );
     });
 
 

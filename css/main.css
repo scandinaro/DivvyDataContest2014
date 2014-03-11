@@ -233,10 +233,33 @@ select {
     color: #fff;
     padding: 5px;
 }
-
+#underPercent{
+    font-family: sans-serif;
+    width: 50px;
+    height: 50px;
+    border-radius: 250px;
+    color: #fff;
+    line-height: 50px;
+    text-align: center;
+    margin: -10px 0 20px 10px;
+    background-color: #E9B055;
+    float: left;
+}
 #overLegend {
     background-color: #61A19F;
     float: right;
     color: #fff;
     padding: 5px;
+}
+#overPercent{
+    font-family: sans-serif;
+    width: 50px;
+    height: 50px;
+    border-radius: 250px;
+    color: #fff;
+    line-height: 50px;
+    text-align: center;
+    margin: -10px 10px 20px 0;
+    background-color: #61A19F;
+    float: right;
 }

@@ -54,7 +54,7 @@ $( document ).ready(function() {
 
 function loadIntroData(){
     //intro data
-    $.get("includes/generate_intro_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+    $.get("includes/generate_intro_data.php", function(data) {
         data = $.parseJSON(data);
         var pieData1 = [
             {
@@ -86,6 +86,23 @@ function loadIntroData(){
 
 
 function loadCharts(gender, age, user_type){
+    //intro data
+    $.get("includes/generate_intro_data.php?age=" + age, function(data) {
+        data = $.parseJSON(data);
+        var pieData1 = [
+            {
+                value: parseInt(data.male),
+                color: "#E9B055"
+            },
+            {
+                value : parseInt(data.female),
+                color : "#61A19F"
+            }
+        ];
+        var genderChart = new Chart(document.getElementById("genderCanvas").getContext("2d")).Pie(pieData1);
+        displayChartPercent('malePercent', data.male, 'femalePercent', data.female);
+    });
+
     //heat map
     mapData = [];
     $.get("includes/generate_heatmap_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
@@ -105,7 +122,7 @@ function loadCharts(gender, age, user_type){
 
     // bike accumulation
     var pop_labels, pop_nums = '';
-    $.get("includes/generate_bike_acum_data.php", function(data) {
+    $.get("includes/generate_bike_acum_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
         var acumLabels = [];
         var acumNums = [];

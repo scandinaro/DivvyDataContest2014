@@ -323,3 +323,15 @@ select:disabled{
     height: 40px;
     background-color: #61A19F;
 }
+
+#bad-browser{
+    background-color: rgb(229, 227, 223);
+    height: 100%;
+    z-index: 100;
+    margin: -10px auto 0;
+    position: fixed;
+    color: #ba533f;
+    text-align: center;
+    padding: 200px;
+    font-size: 36px;
+}

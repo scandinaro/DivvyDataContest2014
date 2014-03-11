@@ -1,4 +1,9 @@
 $( document ).ready(function() {
+    if($('#IE').length > 0){
+        browserManager.restrict();
+    } else {
+        browserManager.manage();
+    }
     $('#break_img1').parallax("50%", 0.3);
     $('#break_img2').parallax("50%", 0.3);
     $('#break_img3').parallax("50%", 0.3);
@@ -153,3 +158,29 @@ function displayChartPercent(leftDiv, leftVal, rightDiv, rightVal){
     $('#'+leftDiv).html( Math.round(leftInt/total*100)+"%" );
     $('#'+rightDiv).html( Math.round(rightInt/total*100)+"%" );
 }
+
+var browserManager = {
+    restrict: function(){
+        $('#filter_data').hide();
+        $('body').scrollTop(0).css({'overflow':'hidden'});
+        $(document).bind('scroll',function () {
+            window.scrollTo(0,0);
+        });
+        $('header').after('<div id="bad-browser">Sorry, but this site does not support Internet Explorer or Mobile devices.</div>');
+    },
+    unrestrict:function(){
+        $('#filter_data').show();
+        $(document).unbind('scroll');
+        $('body').css({'overflow':'visible'});
+        $('#bad-browser').remove();
+    },
+    manage:function(){
+        $.get("includes/browser_denial.php", function(data) {
+            if(parseInt(data) == 1){
+                browserManager.restrict();
+            } else {
+                browserManager.unrestrict();
+            }
+        });
+    }
+};

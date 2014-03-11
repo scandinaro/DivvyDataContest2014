@@ -74,9 +74,13 @@ function loadCharts(gender, age, user_type){
         data = $.parseJSON(data);
         var acumLabels = [];
         var acumNums = [];
+        var lowestVal = 0;
         $.each(data, function(i, item) {
             acumLabels.push(item.label);
             acumNums.push(item.num);
+            if (parseInt(item.num)<lowestVal) {
+                lowestVal = item.num;
+            }
         });
 
         var barChartData = {
@@ -87,7 +91,10 @@ function loadCharts(gender, age, user_type){
                 data : acumNums
             }]
         };
-        var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData);
+        lowestVal = Math.ceil(lowestVal/100)*100 - 100;
+        var scaleStepWidth = Math.ceil((Math.abs(lowestVal)/8)/25)*25;
+        var scaleSteps = Math.ceil((Math.abs(lowestVal)*2/scaleStepWidth)) + 2;
+        var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData, {scaleOverride : true, scaleSteps : scaleSteps, scaleStepWidth : scaleStepWidth , scaleStartValue : lowestVal - 100});
     });
 
     //overage chart

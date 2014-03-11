@@ -31,7 +31,7 @@ $results = array();
 
 //TODO handle less than 14 results
 if (count($popResults) >= 14){
-    for ($i=0;$i<=7;$i++){
+    for ($i=0;$i<=6;$i++){
         $results[] = array('label'=>$popResults[$i]['station_name'], 'num'=> $popResults[$i]['diff']);
     }
     for ($i=count($popResults)-7;$i<=count($popResults)-1;$i++){

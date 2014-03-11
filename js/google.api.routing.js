@@ -11,7 +11,7 @@ function initializeRouting() {
     bikeOrigin = new google.maps.LatLng(originData[0], originData[1]);
     bikeDestination = new google.maps.LatLng(destinationData[0], destinationData[1]);
     $(waypointData).each(function(idx, val){
-        if(idx%(parseInt(waypointData.length/waypointLimit)) == 0 || waypointData.length < waypointLimit){
+        if(idx%(Math.ceil(waypointData.length/waypointLimit)) == 0 || waypointData.length < waypointLimit){
             // Because Google maps seems to only allow 7 waypoints per request, so we're going to have to space these out. Also, things will be a lot less cluttered.
             bikeWaypoints.push({
                 location: new google.maps.LatLng(val[0], val[1]),

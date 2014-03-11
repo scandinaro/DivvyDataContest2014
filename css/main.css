@@ -26,6 +26,14 @@ h3 {
     margin:5px 0 20px;
 }
 
+h4 {
+    font-family: 'Arbutus Slab', 'Rockwell', 'Courier New', serif;
+    text-align: center;
+    width: 100%;
+    color:#ba533f;
+    font-size: 16px;
+}
+
 header {
     text-align: center;
     height:119px;
@@ -229,6 +237,29 @@ select:disabled{
 }
 
 .legend {
+}
+
+.left{
+    float:left;
+}
+
+.right {
+    float: right;
+}
+
+
+#maleLegend, #customerLegend {
+    background-color: #E9B055;
+    float: left;
+    color: #fff;
+    padding: 5px;
+}
+
+#femaleLegend, #subscriberLegend {
+    background-color: #61A19F;
+    float: right;
+    color: #fff;
+    padding: 5px;
 }
 
 #underLegend {

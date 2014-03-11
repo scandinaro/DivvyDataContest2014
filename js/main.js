@@ -51,6 +51,36 @@ $( document ).ready(function() {
 });
 
 function loadCharts(gender, age, user_type){
+    //intro data
+    $.get("includes/generate_intro_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+        data = $.parseJSON(data);
+
+        var pieData1 = [
+            {
+                value: parseInt(data.male),
+                color: "#E9B055"
+            },
+            {
+                value : parseInt(data.female),
+                color : "#61A19F"
+            }
+        ];
+        var genderChart = new Chart(document.getElementById("genderCanvas").getContext("2d")).Pie(pieData1);
+
+        var pieData2 = [
+            {
+                value: parseInt(data.customer),
+                color: "#E9B055"
+            },
+            {
+                value : parseInt(data.subscriber),
+                color : "#61A19F"
+            }
+        ];
+        var user_typeChart = new Chart(document.getElementById("user_typeCanvas").getContext("2d")).Pie(pieData2);
+    });
+
+
     //heat map
     mapData = [];
     $.get("includes/generate_heatmap_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
@@ -101,22 +131,17 @@ function loadCharts(gender, age, user_type){
     var over = 0, under = 0;
     $.get("includes/generate_overunder_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
-        var underVal = parseInt(data.under);
-        var overVal = parseInt(data.over);
-        var total = overVal+underVal;
         var pieData = [
             {
-                value: underVal,
+                value: parseInt(data.under),
                 color: "#E9B055"
             },
             {
-                value : overVal,
+                value : parseInt(data.over),
                 color : "#61A19F"
             }
         ];
         var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);
-        $('#underPercent').html( Math.round((underVal/total)*100)+'%' );
-        $('#overPercent').html( Math.round((overVal/total)*100)+'%' );
     });
 
 

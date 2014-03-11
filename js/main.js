@@ -5,6 +5,11 @@ $( document ).ready(function() {
     $('#break_img4').parallax("50%", 0.3);
     $('#break_img5').parallax("50%", 0.3);
 
+    $("#filter_data").submit(function( event ) {
+        loadCharts($("#gender").val(), $("#age").val(), $("#user_type").val());
+        event.preventDefault();
+    });
+
     $("#gender").change(function() {
         var gender = $("#gender").val();
         var age = $("#age").val();
@@ -40,4 +45,68 @@ $( document ).ready(function() {
             $("#gender").attr("disabled", false);
         }
     });
+
+    loadCharts('','','');
+
 });
+
+function loadCharts(gender, age, user_type){
+    //heat map
+    mapData = [];
+    $.get("includes/generate_heatmap_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+        data = $.parseJSON(data);
+        $.each(data, function(i, item) {
+            mapData.push(new google.maps.LatLng(item.latitude, item.longitude));
+        });
+
+        var pointArray = new google.maps.MVCArray(mapData);
+
+        heatmap = new google.maps.visualization.HeatmapLayer({
+            data: pointArray
+        });
+
+        heatmap.setMap(map);
+    });
+
+    // bike accumulation
+    var pop_labels, pop_nums = '';
+    $.get("includes/generate_bike_acum_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+        data = $.parseJSON(data);
+        var acumLabels = [];
+        var acumNums = [];
+        $.each(data, function(i, item) {
+            acumLabels.push(item.label);
+            acumNums.push(item.num);
+        });
+
+        var barChartData = {
+            labels : acumLabels,
+            datasets : [{
+                fillColor : "rgba(151,187,205,0.5)",
+                strokeColor : "rgba(151,187,205,1)",
+                data : acumNums
+            }]
+        };
+        var popChart = new Chart(document.getElementById("popCanvas").getContext("2d")).Bar(barChartData);
+    });
+
+    //overage chart
+    var over = 0, under = 0;
+    $.get("includes/generate_overunder_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
+        data = $.parseJSON(data);
+        var pieData = [
+            {
+                value: parseInt(data.under),
+                color: "#E9B055"
+            },
+            {
+                value : parseInt(data.over),
+                color : "#61A19F"
+            }
+        ];
+        var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);
+    });
+
+
+
+}

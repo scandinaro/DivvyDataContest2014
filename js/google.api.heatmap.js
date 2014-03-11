@@ -1,5 +1,7 @@
 var map, heatmap;
 
+var mapData = [];
+
 function initialize() {
     var mapOptions = {
         zoom: 11,

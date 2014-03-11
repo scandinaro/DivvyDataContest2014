@@ -61,6 +61,8 @@
             <br />
             <div id="maleLegend">Male</div>
             <div id="femaleLegend">Female</div>
+            <div id="malePercent" class="percent-indicator left-percent"></div>
+            <div id="femalePercent" class="percent-indicator right-percent"></div>
         </div>
         <div class="right">
             <h4 >User Type *filter agnostic</h4>
@@ -68,6 +70,8 @@
             <br />
             <div id="customerLegend">Customer</div>
             <div id="subscriberLegend">Subscriber</div>
+            <div id="customerPercent" class="percent-indicator left-percent"></div>
+            <div id="subscriberPercent" class="percent-indicator right-percent"></div>
         </div>
         <div class="clear"></div>
     </div>
@@ -107,8 +111,7 @@
         <h3>Map the route of a particular Divvy Bike.</h3>
         <div id="routing-map-canvas"></div>
         <div>
-            <label>Select a start date to view a potential route: <input type="date" name="bike-day-start" id="bike-day-start" /></label><br/>
-            <label>Select a end date to view a potential route: <input type="date" name="bike-day-end" id="bike-day-end" /></label><br/>
+            <label>Select a date to view a potential route: <input type="date" name="bike-day" id="bike-day" /></label><br/>
             <label>What Divvy would you like to follow: <input type="number" name="bike-id" id="bike-id" placeholder="1-3003" /><br/>
             <em>Note: not all numbers are valid.</em></label><br/>
             <button type="button" id="submit-route">Submit</button>
@@ -128,6 +131,8 @@
         <div class="legend">
             <div id="overLegend">Over 30 minutes</div>
             <div id="underLegend">Under 30 minutes</div>
+            <div id="underPercent" class="percent-indicator left-percent"></div>
+            <div id="overPercent"  class="percent-indicator right-percent"></div>
         </div>
     </div>
     <div id="break_img5" class="break_img">

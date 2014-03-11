@@ -15,10 +15,8 @@ $( document ).ready(function() {
         var age = $("#age").val();
         if (gender == "" && age == "") {
             $("#user_type").attr("disabled", false);
-        }
-        else {
-            $("#user_type").val('');
-            $("#user_type").attr("disabled", true);
+        } else {
+            $("#user_type").val('').attr("disabled", true);
         }
     });
 
@@ -27,10 +25,8 @@ $( document ).ready(function() {
         var gender = $("#gender").val();
         if (age == "" && gender == "") {
             $("#user_type").attr("disabled", false);
-        }
-        else {
-            $("#user_type").val('');
-            $("#user_type").attr("disabled", true);
+        } else {
+            $("#user_type").val('').attr("disabled", true);
         }
     });
 
@@ -39,8 +35,7 @@ $( document ).ready(function() {
         if (user_type == "customer") {
             $("#age").attr("disabled", true);
             $("#gender").attr("disabled", true);
-        }
-        else {
+        } else {
             $("#age").attr("disabled", false);
             $("#gender").attr("disabled", false);
         }
@@ -56,7 +51,6 @@ function loadIntroData(){
     //intro data
     $.get("includes/generate_intro_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
-
         var pieData1 = [
             {
                 value: parseInt(data.male),
@@ -68,6 +62,7 @@ function loadIntroData(){
             }
         ];
         var genderChart = new Chart(document.getElementById("genderCanvas").getContext("2d")).Pie(pieData1);
+        displayChartPercent('malePercent', data.male, 'femalePercent', data.female);
 
         var pieData2 = [
             {
@@ -80,6 +75,7 @@ function loadIntroData(){
             }
         ];
         var user_typeChart = new Chart(document.getElementById("user_typeCanvas").getContext("2d")).Pie(pieData2);
+        displayChartPercent('customerPercent', data.customer, 'subscriberPercent', data.subscriber);
     });
 }
 
@@ -132,7 +128,6 @@ function loadCharts(gender, age, user_type){
     });
 
     //overage chart
-    var over = 0, under = 0;
     $.get("includes/generate_overunder_data.php?gender=" + gender + "&age=" + age + "&user_type=" + user_type, function(data) {
         data = $.parseJSON(data);
         var pieData = [
@@ -146,8 +141,15 @@ function loadCharts(gender, age, user_type){
             }
         ];
         var overageChart = new Chart(document.getElementById("overageCanvas").getContext("2d")).Pie(pieData);
+        displayChartPercent('underPercent', data.under, 'overPercent', data.over);
     });
 
+}
 
-
+function displayChartPercent(leftDiv, leftVal, rightDiv, rightVal){
+    var leftInt = parseInt(leftVal);
+    var rightInt = parseInt(rightVal);
+    var total = leftInt+rightInt;
+    $('#'+leftDiv).html( Math.round(leftInt/total*100)+"%" );
+    $('#'+rightDiv).html( Math.round(rightInt/total*100)+"%" );
 }

@@ -84,10 +84,10 @@ function isRouteDataAvailable(){
             initializeRouting();
         } else {
             //Data could not be obtained
-            $('#bike-day').val(routeData.bikeDate).css({backgroundColor: '#E67777'});
-            $('#bike-id').val(routeData.bikeId).css({backgroundColor: '#E67777'});
+            $('#bike-day').val(routeData.bikeDate).css({backgroundColor: '#E9B156'});
+            $('#bike-id').val(routeData.bikeId).css({backgroundColor: '#E9B156'});
             $('#routing-map-canvas')
-                .html("<h1 style='padding-top: 150px;color: #ba533f;'>OOPs!</h1><br/><h4>It seems that we don't have any data available for Bike:"+routeData.bikeId+" on: "+routeData.bikeDate+".</h4>")
+                .html("<h1 style='padding-top: 150px;color: #ba533f;'>OOPS!</h1><br/><h4>It seems that we don't have any data available for Bike:"+routeData.bikeId+" on: "+routeData.bikeDate+".</h4>")
                 .css({textAlign: 'center'});
         }
     }

@@ -111,6 +111,10 @@ select {
 	height:34px;
 	border:none;
 }
+select:disabled{
+	opacity: .7;
+	color: #a58f82;
+}
 .logo{
     background-image:url(../images/logo.png);
     background-repeat:no-repeat;

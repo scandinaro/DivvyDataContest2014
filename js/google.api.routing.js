@@ -33,7 +33,6 @@ function initializeRouting() {
 }
 
 function calcRoute() {
-    console.log("Calculating route");
     var request = {
         origin: bikeOrigin,
         destination: bikeDestination,
@@ -63,8 +62,7 @@ function getRouteData (){
         success:function(data){
             // successful request
             if(data == ''){
-                // TODO - panic
-                console.error('Time to panic!!! This should not happen');
+                // 'Time to panic!!! This should not happen'
             } else if(parseInt(data) == 0) {
                 routeData = '';
             } else {
@@ -77,23 +75,20 @@ function getRouteData (){
 }
 
 function isRouteDataAvailable(){
-    console.log('checking if data is available');
     if(typeof routeData == 'undefined'){
-        console.log('waiting...');
         setTimeout(isRouteDataAvailable, 3000);
     } else {
-        console.log('route data set');
         if(!routeData.error){
             $('#bike-day').val(routeData.bikeDate);
             $('#bike-id').val(routeData.bikeId);
             initializeRouting();
         } else {
+            //Data could not be obtained
             $('#bike-day').val(routeData.bikeDate).css({backgroundColor: '#E67777'});
             $('#bike-id').val(routeData.bikeId).css({backgroundColor: '#E67777'});
             $('#routing-map-canvas')
                 .html("<h1 style='padding-top: 150px;color: #ba533f;'>OOPs!</h1><br/><h4>It seems that we don't have any data available for Bike:"+routeData.bikeId+" on: "+routeData.bikeDate+".</h4>")
                 .css({textAlign: 'center'});
-            console.error('error: Data could not be obtained');
         }
     }
 }

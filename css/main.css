@@ -37,27 +37,41 @@ header {
     z-index:2;
 }
 header form{
-	padding:50px 0 0;
+	padding:52px 0 0;
 	float:right;
 }
-input[type=submit]{
+input{
+	-webkit-appearance:none;
+	width:100px;
+	height:34px;
+	background-color: #f3e4bc;
+	border:none;
+	border-radius:3px;
+	margin:0 0 0 5px;
+	color:#573a48;
+	font-size:14px;
+	padding:0 10px;
+	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	font-weight:bold;
+}
+input[type=submit], button{
 	font-family: 'IM Fell Great Primer SC', "Palatino Linotype", "Book Antiqua", Palatino, serif;
     color:#fff;
     font-size:18px;
 	background-color:#e16652;
+	width:80px;
 	border:0;
 	border-bottom:solid 2px #ba533f;
 	border-radius:3px;
-	padding:5px 15px;
-	margin:0 0 0 5px;
+	height:32px;
 	-webkit-font-smoothing: antialiased;
 }
-input[type=submit]:hover{
+input[type=submit]:hover, button:hover{
 	background-color:#ba533f;
 	cursor:pointer;
 	border-bottom:solid 2px #9a431f;
 }
-select{
+/*select{
 	background-color:#f3e4bc;
 	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
     color:#573a48;
@@ -68,6 +82,31 @@ select{
 	border-radius:0;
 	margin:0 5px;
 	cursor:pointer;
+}*/
+::-webkit-input-placeholder{
+	color:#573a48;
+}
+label input{
+	width:200px;
+}
+label{
+	margin:15px 0;
+}
+select {
+	-webkit-appearance:none;
+	background-color:#f3e4bc;
+	background-image:url('../images/select.png');
+	background-size:300px 34px;
+	background-position:right;
+	border-radius:5px;
+	margin:0 0 0 5px;
+	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
+	color:#573a48;
+	font-size:14px;
+	padding:0 10px;
+	width:125px;
+	height:34px;
+	border:none;
 }
 .logo{
     background-image:url(../images/logo.png);

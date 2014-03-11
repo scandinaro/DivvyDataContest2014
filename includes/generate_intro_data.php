@@ -7,9 +7,17 @@
  */
 
 require_once 'dbcache.php';
+require_once 'filter.php';
 
-$male = dbcache::query("SELECT count(id) as result FROM trips WHERE gender='male'");
-$female = dbcache::query("SELECT count(id) as result FROM trips WHERE gender='female'");
+$gender = isset($_GET['gender']) ? $_GET['gender'] : '';
+$age = isset($_GET['age']) ? $_GET['age'] : '';
+$user_type = isset($_GET['user_type']) ? $_GET['user_type'] : '';
+
+$filters = filter::generateWhere($gender, $age, $user_type);
+$filtersNoWhere = $filters['filters_no_where'];
+
+$male = dbcache::query("SELECT count(a.id) as result FROM trips AS a WHERE a.gender='male' $filtersNoWhere");
+$female = dbcache::query("SELECT count(a.id) as result FROM trips AS a WHERE a.gender='female' $filtersNoWhere");
 $male = $male[0]['result'];
 $female = $female[0]['result'];
 

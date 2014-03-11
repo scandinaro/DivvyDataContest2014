@@ -247,6 +247,9 @@ select:disabled{
     float: right;
 }
 
+#overageCanvas {
+    margin: 0px auto;
+}
 
 #maleLegend, #customerLegend {
     background-color: #E9B055;

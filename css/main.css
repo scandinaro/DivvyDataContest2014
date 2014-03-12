@@ -100,6 +100,7 @@ input[type=submit]:hover, button:hover{
 }
 label input{
 	width:200px;
+	margin:0!important;
 }
 label input[type=number]{
 	width:50px;

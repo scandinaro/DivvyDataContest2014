@@ -52,7 +52,7 @@ $( document ).ready(function() {
 });
 
 function credits() {
-    alert("open source software usage:");
+    alert("open source software usage:\n- JQuery: http://jquery.com\n- MeekroDB: http://www.meekro.com\n- Chart.js: http://chartjs.org");
 }
 
 function loadIntroData(){

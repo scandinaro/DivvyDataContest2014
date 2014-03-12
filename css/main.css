@@ -254,15 +254,14 @@ canvas{
 	margin-right:75px;
 	width:303px;
 }
+
 .center{
 	margin:0 auto;
 	width:400px;
 }
+
 .center canvas{
 	margin:0 50px;
-}
-#overageCanvas {
-    margin: 0px auto;
 }
 
 #maleLegend{

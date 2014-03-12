@@ -51,6 +51,9 @@ $( document ).ready(function() {
 
 });
 
+function credits() {
+    alert("open source software usage:");
+}
 
 function loadIntroData(){
     //intro data

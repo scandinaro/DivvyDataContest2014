@@ -79,6 +79,10 @@ input[type=submit]:hover, button:hover{
 	cursor:pointer;
 	border-bottom:solid 2px #9a431f;
 }
+#random-route{
+	width: 145px;
+	margin: 0 0 0 15px;
+}
 /*select{
 	background-color:#f3e4bc;
 	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
@@ -96,12 +100,10 @@ input[type=submit]:hover, button:hover{
 }
 label input{
 	width:200px;
+	margin:0!important;
 }
 label input[type=number]{
 	width:50px;
-}
-label{
-	line-height:50px;
 }
 select {
 	-webkit-appearance:none;
@@ -114,7 +116,7 @@ select {
 	font-family: 'IM Fell Great Primer', "Palatino Linotype", "Book Antiqua", Palatino, serif;
 	color:#573a48;
 	font-size:14px;
-	padding:0 10px;
+	padding:8px 7px 8px 10px;
 	width:140px;
 	height:34px;
 	border:none;
@@ -238,15 +240,27 @@ select:disabled{
 
 .legend {
 }
-
+canvas{
+	padding:0 0 10px;
+}
 .left{
     float:left;
+	margin-left:75px;
+	width:303px;
 }
 
 .right {
     float: right;
+	margin-right:75px;
+	width:303px;
 }
-
+.center{
+	margin:0 auto;
+	width:400px;
+}
+.center canvas{
+	margin:0 50px;
+}
 #overageCanvas {
     margin: 0px auto;
 }
@@ -347,4 +361,17 @@ select:disabled{
     text-align: center;
     padding: 200px;
     font-size: 36px;
+}
+.small{
+	font-size:11px;
+	color:#a58f82;
+}
+.footer{
+	font-size:11px;
+	color:#a58f82;
+	padding:20px 0 10px;
+	text-align:center;
+}
+.footer a{
+	color:#e16652;
 }

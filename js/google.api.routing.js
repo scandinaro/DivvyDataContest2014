@@ -123,7 +123,14 @@ Math.degrees = function(radians) {
 };
 
 $(document).ready(function(){
+    $('#bike-id').val(2);
+    $('#bike-day').val('2013-07-01');
     $('#submit-route').click(getRouteData);
+    $('#random-route').click(function(){
+        $('#bike-day').val('');
+        $('#bike-id').val('');
+        getRouteData();
+    });
 });
 
 function nocache(){

@@ -358,9 +358,8 @@ canvas{
     position: fixed;
     color: #ba533f;
     text-align: center;
-    padding: 200px;
     font-size: 36px;
-}
+    width: 100%;}
 .small{
 	font-size:11px;
 	color:#a58f82;

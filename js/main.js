@@ -52,7 +52,7 @@ $( document ).ready(function() {
 });
 
 function credits() {
-    alert("open source software usage:\n- JQuery: http://jquery.com\n- MeekroDBgit: http://www.meekro.com\n- Chart.js: http://chartjs.org\n- JQuery Parallax: http://www.gnu.org/licenses/gpl.html\n- Google Maps: http://maps.google.com");
+    alert("open source software usage:\n- JQuery: http://jquery.com\n- MeekroDBgit: http://www.meekro.com\n- Chart.js: http://chartjs.org\n- JQuery Parallax: http://www.gnu.org/licenses/gpl.html\n- Google Maps: http://maps.google.com\n- Mobile Detect: http://mobiledetect.net/");
 }
 
 function loadIntroData(){
@@ -187,6 +187,10 @@ var browserManager = {
             window.scrollTo(0,0);
         });
         $('header').after('<div id="bad-browser">Sorry, but this site does not support Internet Explorer or Mobile devices.</div>');
+        $('.break_img').remove();
+        $('.graph-wrapper').remove();
+        $('header .wrapper').css({paddingLeft: 10});
+        $('header .logo').css({backgroundSize: 280, width: 280, textAlign: 'center'});
     },
     unrestrict:function(){
         $('#filter_data').show();
